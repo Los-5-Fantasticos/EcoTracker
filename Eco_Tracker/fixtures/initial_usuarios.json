@@ -1,0 +1,47 @@
+[
+  {
+    "model": "Eco_Tracker.usuarios",
+    "pk": 1,
+    "fields": {
+      "nombre": "Juan Pérez",
+      "email": "juan.perez@example.com",
+      "fecha_registro": "2025-10-29T20:00:00Z"
+    }
+  },
+  {
+    "model": "Eco_Tracker.usuarios",
+    "pk": 2,
+    "fields": {
+      "nombre": "María López",
+      "email": "maria.lopez@example.com",
+      "fecha_registro": "2025-10-29T20:05:00Z"
+    }
+  },
+  {
+    "model": "Eco_Tracker.usuarios",
+    "pk": 3,
+    "fields": {
+      "nombre": "Carlos Gómez",
+      "email": "carlos.gomez@example.com",
+      "fecha_registro": "2025-10-29T20:10:00Z"
+    }
+  },
+  {
+    "model": "Eco_Tracker.usuarios",
+    "pk": 4,
+    "fields": {
+      "nombre": "Ana Ruiz",
+      "email": "ana.ruiz@example.com",
+      "fecha_registro": "2025-10-29T20:15:00Z"
+    }
+  },
+  {
+    "model": "Eco_Tracker.usuarios",
+    "pk": 5,
+    "fields": {
+      "nombre": "Luis Fernández",
+      "email": "luis.fernandez@example.com",
+      "fecha_registro": "2025-10-29T20:20:00Z"
+    }
+  }
+]
