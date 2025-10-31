@@ -1,0 +1,4 @@
+
+body { font-family: system-ui, Arial, sans-serif; margin: 2rem; }
+header nav a { margin-right: 1rem; text-decoration: none; }
+button { padding: .5rem 1rem; cursor: pointer; }
