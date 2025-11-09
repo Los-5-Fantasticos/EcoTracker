@@ -4,13 +4,57 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Ecotracker</title>
-        <link rel="shortcut icon" href="{% static "img/icon.ico" %}" type="imange/x-icon">
+        <title>Ecotracker - Registro</title>
+        <link rel="shortcut icon" href="{% static "img/icon.ico" %}" type="image/x-icon">
         <link rel="stylesheet" href="{% static "css/styles.css" %}">
     </head>
     <body>
-        <h1>PRIORICE LA BICICLETA ANTES QUE EL AUTOMOVIL</h1> <br>
-        <h2>SU DECISIÓN SALVA AL MEDIO AMBIENTE</h2><br>
-        <h3>¡QUE TENGA UN EXCELENTE DIA!</h3>
-    </body>
+        <div class="container">
+            
+            <div class="profile-pic-container">
+                {% if usuario.foto_perfil %}
+                    <img src="{{ usuario.foto_perfil.url }}" alt="Imagen de Perfil" class="profile-pic">
+                {% else %}
+                    <img src="{% static "img/default_profile.jpg" %}" alt="Imagen por Defecto" class="profile-pic">
+                {% endif %}
+            </div>
+
+            <form action="{% url 'registro' %}" method="POST" enctype="multipart/form-data">
+                
+                {% csrf_token %}
+                
+                <div class="input-group">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="username">Nombre de usuario</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="correo">Correo</label>
+                    <input type="email" id="correo" name="correo" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+
+                <div class="buttons-container">
+                    <button type="submit" class="btn primary-btn">
+                        Registrarse
+                    </button>
+                    
+                    <a href="{% url 'login' %}" class="btn secondary-btn">
+                        Iniciar sesión
+                    </a>
+                </div>
+                
+            </form>
+            </div>
+   </body>
 </html>
+
