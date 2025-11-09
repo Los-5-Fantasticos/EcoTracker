@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Perfil y Huella de Carbono</title>
+    <link rel="stylesheet" href="{% static "css/styles.css" %}">
+    <style>
+        /* Agrega estilos básicos para que se parezca al diseño */
+        .header-box { background-color: #F8E8C9; padding: 20px; border-radius: 15px; margin-bottom: 20px; display: flex; align-items: center; }
+        .data-box { background-color: #FFFFFF; padding: 15px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 15px; }
+        .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container" style="max-width: 900px;">
+        
+        <div class="header-box">
+            <img src="{% if usuario.foto_perfil %}{{ usuario.foto_perfil.url }}{% else %}{% static "img/default_profile.jpg" %}{% endif %}" alt="Perfil" style="width: 80px; height: 80px; border-radius: 50%;">
+            <div style="margin-left: 20px;">
+                <p><strong>Nombre de usuario:</strong> {{ usuario.username }}</p>
+                <p><strong>Email:</strong> {{ usuario.email }}</p>
+                
+            </div>
+        </div>
+        
+        <div class="grid-container">
+            
+            <div class="data-box" style="grid-column: 1;">
+                <h3>Sugerencias de rutas más ecológicas</h3>
+                <p>Mapa de Sugerencias .</p>
+            </div>
+
+            <div class="data-box" style="grid-column: 2;">
+                <h3>Visualizar huella de carbono:</h3>
+                <button>Semanal</button>
+                <button>Mensual</button>
+                <p>Gráfico de Huella (L, M, M, J, V, S, D)</p>
+                </div>
+
+            <div class="data-box" style="grid-column: 1 / span 2; display: flex; justify-content: space-around;">
+                 <head>
+                    <meta charset="UTF-8">
+                    <title>Calculadora Ecológica IA</title>
+                </head>
+                <body>
+                     <h1>Calculadora ecológica del día 🌱</h1>
+                     <textarea id="texto" rows="4" cols="50" placeholder="Describe tu día aquí..."></textarea><br>
+                     <button onclick="calcular()">Calcular emisiones</button>
+                     <pre id="resultado"></pre>
+                        
+                    <script> 
+                    async function calcular() {
+                        const texto = document.getElementById("texto").value;
+                        const res = await fetch("/api/calcular/", {
+                            method: "POST",
+                            headers: {"Content-Type": "application/json"},
+                            body: JSON.stringify({texto})
+                        });
+                        const data = await res.json();
+                        document.getElementById("resultado").textContent = JSON.stringify(data, null, 2);
+                    }
+                </script>
+            </body>
+            </div>
+
+        </div>
+
+        <p><a href="{% url 'logout' %}">Cerrar Sesión</a></p>
+    </div>
+</body>
+</html>
