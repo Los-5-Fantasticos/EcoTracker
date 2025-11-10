@@ -1,29 +1,28 @@
-/*Diseño en proceso */
+/*Diseño*/
 
 body {
     font-family: Arial, sans-serif; 
     background-color: #Fae3bd; /* Fondo de la página */
     display: flex;
-    justify-content: center; /* Centra el contenido horizontalmente */
-    align-items: center; /* Centra el contenido verticalmente */
+    justify-content: center; 
+    align-items: center; 
     min-height: 100vh;
     margin: 0;
     box-sizing: border-box;
 }
 
 .container {
-    background-color: #F1c878; /* Fondo del cuadradito*/
-    border-radius: 20px; /* Bordes redondeados */
+    background-color: #F1c878; 
+    border-radius: 20px; 
     padding: 30px 40px; 
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); 
     width: 100%;
     max-width: 400px; 
     text-align: center; 
 }
 
-/* --------------------
-   2. Imagen de Perfil
-   -------------------- */
+/* Imagen de Perfil */
+
 .profile-pic-container {
     margin-bottom: 25px;
 }
@@ -31,14 +30,13 @@ body {
 .profile-pic {
     width: 120px; 
     height: 120px;
-    border-radius: 50%; /* Esto la convierte en círculo */
+    border-radius: 50%; /* esto lo convierte en circulo */
     object-fit: cover;
     border: 4px solid #F1c878; /* El borde circular alrededor de la imagen */
 }
 
-/* --------------------
-   3. Campos de Entrada
-   -------------------- */
+/* Entrada */
+
 .input-group {
     margin-bottom: 20px; 
     text-align: left; 
@@ -55,24 +53,24 @@ body {
 .input-group input {
     width: 100%;
     padding: 10px 0; 
-    border: none; /* Elimina todos los bordes por defecto */
-    border-bottom: 1px solid #f9e6c0; /* Añade solo la línea inferior */
+    border: none; 
+    border-bottom: 1px solid #f9e6c0; 
     background-color: transparent; 
-    outline: none; /* Quita el contorno azul al enfocar */
+    outline: none; 
     font-size: 16px;
     color: #744820; 
 }
 
 .input-group input:focus {
-    border-bottom-color: #A08C75; /* Resalta la línea al hacer clic/escribir */
+    border-bottom-color: #A08C75;
 }
 
-/* --------------------
-   4. Botones
-   -------------------- */
+/* botones */
+  
+  
 .buttons-container {
     margin-top: 30px;
-    display: flex; /* Coloca los botones en línea */
+    display: flex; 
     justify-content: space-around; 
     gap: 15px; 
 }
@@ -80,7 +78,7 @@ body {
 .btn {
     padding: 12px 25px;
     border: none;
-    border-radius: 25px; /* Bordes muy redondeados para el estilo 'píldora' */
+    border-radius: 25px; 
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s ease;
