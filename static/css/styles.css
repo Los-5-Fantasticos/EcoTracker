@@ -99,9 +99,56 @@ body {
 .secondary-btn {
     background-color: #f9e6c0; /* Botón "Iniciar Sesión" */
     color: #744820;
-    border: 1px solid #D8C3A5; 
+    border: 1px solid #D8C3A5;
 }
+
+
+
+
+
 
 .secondary-btn:hover {
     background-color: #D8C3A5;
+}
+
+/* Página de inicio*/
+
+.container2 {
+    text-align: center; /* contenedor principal */
+    max-width: 750px;
+    padding: 20px;
+}
+
+.logo {
+    width: 120px; /* logo */
+    margin-bottom: 15px;
+}
+
+h1 {
+    font-size: 2.8em; /* Titulo principal */
+    color: #aac09f
+    margin-bottom: 15px;
+}
+
+.descripcion {
+    color: #79926c; /* texto descriptivo */
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 40px;
+}
+
+.third-btn {
+    display: inline-block; /* boton para entrar */
+    background-color: #79926c;
+    color: white;
+    text-decoration: none;
+    padding: 12px 40px;
+    font-size: 1.1em;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+}
+
+.third-btn:hover {
+    background-color: #6b8061; /* Verde más oscuro al pasar el mouse */
+    transform: scale(1.05);
 }
