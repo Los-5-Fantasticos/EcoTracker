@@ -4,6 +4,8 @@ from django.contrib.auth.models import User         # Modelo para crear usuarios
 from django.contrib import messages                 # Para mensajes de éxito/error
 from django.db import IntegrityError                # Para manejar usuarios/emails duplicados
 from django.contrib.auth.decorators import login_required 
+from .forms import CarUsageForm
+from .models import Registro, Item, Clientes
 
 def index(request):
     """Renderiza la página de inicio."""
@@ -97,3 +99,36 @@ def ver_perfil(request):
     }
     
     return render(request, 'ecotracker/perfil.html', context)
+
+@login_required(login_url='login')
+def registrar_auto(request):
+    """Registra el uso del auto y calcula la huella de carbono."""
+    
+    if request.method == 'POST':
+        form = CarUsageForm(request.POST)
+        if form.is_valid():
+            manejó_auto = form.cleaned_data['manejó_auto']
+            
+            if manejó_auto == 'yes':
+                distancia = form.cleaned_data.get('distancia', 0)
+                # Factor simple: 0.21 kg CO2 por km (promedio de autos)
+                huella = distancia * 0.21
+                
+                messages.success(request, f'✅ Huella de carbono: {huella:.2f} kg CO2')
+                return render(request, 'ecotracker/input_data.html', {'form': form, 'huella': huella})
+            else:
+                messages.info(request, 'No registraste uso de auto.')
+                return render(request, 'ecotracker/input_data.html', {'form': form})
+    else:
+        form = CarUsageForm()
+    
+    return render(request, 'ecotracker/input_data.html', {'form': form})
+    
+def calcular_api(request):
+    """API simple para calcular huella de carbono basada en distancia recorrida en auto."""
+    from django.http import JsonResponse
+
+    distancia = float(request.GET.get('distancia', 0))
+    huella = distancia * 0.21  # Factor simple: 0.21 kg CO2 por km
+
+    return JsonResponse({'distancia': distancia, 'huella_co2_kg': huella})

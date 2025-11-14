@@ -47,6 +47,9 @@
                      <textarea id="texto" rows="4" cols="50" placeholder="Describe tu día aquí..."></textarea><br>
                      <button onclick="calcular()">Calcular emisiones</button>
                      <pre id="resultado"></pre>
+                    <button onclick="location.href='{% url 'registrar_auto' %}'">
+                        Registrar uso de auto 🚗
+                    </button>
                         
                     <script> 
                     async function calcular() {

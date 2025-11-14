@@ -1,6 +1,8 @@
 from django.urls import path
 from . import views
 from django.contrib.auth import views as auth_views
+from .views import registrar_auto
+from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
 
@@ -20,4 +22,8 @@ urlpatterns = [
     
     # RUTA DE DESTINO DESPUÉS DEL LOGIN
     path('perfil/', views.ver_perfil, name='perfil'),
+
+    path('registrar-auto/', registrar_auto, name='registrar_auto'),
+    path('perfil/', views.ver_perfil, name='perfil'),
+    path('api/calcular/', login_required(views.calcular_api), name='api_calcular'),
 ]
