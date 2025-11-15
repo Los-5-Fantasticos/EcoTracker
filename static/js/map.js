@@ -242,15 +242,15 @@ function handleLocationError(browserHasGeolocation) {
 
 
 function updateHuella() {
-    const itemSelect    = document.getElementById('item-select');
+    const itemSelect = document.getElementById('item-select');
     const distanceInput = document.getElementById('distance-km');
-    const timeInput     = document.getElementById('time-sec');
+    const timeInput = document.getElementById('time-sec');
 
     const huellaDistDisplay = document.getElementById('huella-dist-display');
     const huellaTimeDisplay = document.getElementById('huella-time-display');
 
-    const huellaDistInput   = document.getElementById('huella-kg-dist');
-    const huellaTimeInput   = document.getElementById('huella-kg-time');
+    const huellaDistInput = document.getElementById('huella-kg-dist');
+    const huellaTimeInput = document.getElementById('huella-kg-time');
 
     if (!itemSelect || !distanceInput || !timeInput ||
         !huellaDistDisplay || !huellaTimeDisplay) {
@@ -269,31 +269,31 @@ function updateHuella() {
 
     // Factores desde los data-*
     const factorDistStr = option.getAttribute('data-factor-dist')
-                       || option.getAttribute('data-factor')
-                       || '0';
+        || option.getAttribute('data-factor')
+        || '0';
     const factorTimeStr = option.getAttribute('data-factor-time') || '0';
 
     let factorDist = parseFloat(String(factorDistStr).replace(',', '.')) || 0; // kg CO₂ / km
     let factorTime = parseFloat(String(factorTimeStr).replace(',', '.')) || 0; // kg CO₂ / hora
-    if(factorTime === 0 && factorDist === 0) {
+    if (factorTime === 0 && factorDist === 0) {
         huellaDistDisplay.textContent = '–';
         huellaTimeDisplay.textContent = '–';
         if (huellaDistInput) huellaDistInput.value = '';
         if (huellaTimeInput) huellaTimeInput.value = '';
         return;
     }
-    if(factorDist === 0 && factorTime !== 0) {
+    if (factorDist === 0 && factorTime !== 0) {
         factorDist = factorTime; // Si no hay factor por distancia, usar el de tiempo
-    
+
     }
 
-    if(factorTime === 0 && factorDist !== 0) {
+    if (factorTime === 0 && factorDist !== 0) {
         factorTime = factorDist; // Si no hay factor por tiempo, usar el de distancia
     }
 
     const distanceKm = parseFloat(distanceInput.value || '0');
-    const timeSec    = parseFloat(timeInput.value || '0');
-    const timeHours  = timeSec / 3600;
+    const timeSec = parseFloat(timeInput.value || '0');
+    const timeHours = timeSec / 3600;
 
     const huellaDist = factorDist * distanceKm;
     const huellaTime = factorTime * timeHours;
@@ -330,21 +330,47 @@ function haversineKm(lat1, lng1, lat2, lng2) {
     return meters / 1000.0; // km
 }
 
+function updateSubmitButtons() {
+    const itemSelect = document.getElementById('item-select');
+    const distanceInput = document.getElementById('distance-km');
+    const timeInput = document.getElementById('time-sec');
+
+    const btnSaveReturn = document.getElementById('btn-save-return');
+    const btnSaveAdd = document.getElementById('btn-save-add');
+
+    if (!itemSelect || !distanceInput || !timeInput ||
+        !btnSaveReturn || !btnSaveAdd) {
+        return;
+    }
+
+    const itemSelected = !!itemSelect.value; // valor distinto de vacío
+    const distance = parseFloat(distanceInput.value || '0');
+    const timeSec = parseFloat(timeInput.value || '0');
+
+    const hasDistanceOrTime = (distance > 0) || (timeSec > 0);
+    const enable = itemSelected && hasDistanceOrTime;
+
+    btnSaveReturn.disabled = !enable;
+    btnSaveAdd.disabled = !enable;
+}
 
 document.addEventListener('DOMContentLoaded', function () {
-    const itemSelect    = document.getElementById('item-select');
+    const itemSelect = document.getElementById('item-select');
     const distanceInput = document.getElementById('distance-km');
-    const timeInput     = document.getElementById('time-sec');
-    const clearBtn      = document.getElementById('clear-form-btn');
+    const timeInput = document.getElementById('time-sec');
+    const clearBtn = document.getElementById('clear-form-btn');
 
     if (itemSelect) {
         itemSelect.addEventListener('change', updateHuella);
+        itemSelect.addEventListener('change', updateSubmitButtons);
     }
     if (distanceInput) {
         distanceInput.addEventListener('input', updateHuella);
+        distanceInput.addEventListener('change', updateSubmitButtons);
     }
     if (timeInput) {
         timeInput.addEventListener('input', updateHuella);
+        timeInput.addEventListener('change', updateSubmitButtons);
     }
 
     if (clearBtn) {
@@ -360,8 +386,10 @@ document.addEventListener('DOMContentLoaded', function () {
             if (window.clearMapRoute) {
                 window.clearMapRoute();
             }
+            updateSubmitButtons();
         });
     }
+    updateSubmitButtons();
 });
 
 // Para que map.js pueda llamar si hace falta
