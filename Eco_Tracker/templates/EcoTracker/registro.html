@@ -1,0 +1,72 @@
+{% extends 'ecotracker/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="row justify-content-center my-4">
+    <div class="col-lg-8 col-xl-6">
+
+        <div class="card shadow-sm border-0">
+            <div class="card-body p-4 p-md-5">
+
+                {% if messages %}
+                <div class="messages-container mb-4">
+                    {% for message in messages %}
+                    <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show"
+                        role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <h2 class="text-center mb-4">Crear Cuenta</h2>
+
+                <form action="{% url 'crear_usuario' %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Nombre de usuario</label>
+                        <input type="text" class="form-control" id="username" name="username" required>
+                    </div>
+
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <label for="nombre" class="form-label">Nombres</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="apellido" class="form-label">Apellidos</label>
+                            <input type="text" class="form-control" id="apellido" name="apellido" required>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="correo" class="form-label">Correo electrónico</label>
+                        <input type="email" class="form-control" id="correo" name="correo" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Contraseña</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="foto_perfil" class="form-label">Foto de perfil (Opcional)</label>
+                        <input class="form-control" type="file" id="foto_perfil" name="foto_perfil" accept="image/*">
+                    </div>
+
+
+                    <div class="d-flex flex-column flex-md-row gap-2 mt-4">
+                        <a href="{% url 'index' %}" class="btn btn-outline-secondary w-100">
+                            Cancelar
+                        </a>
+                        <button type="submit" class="btn btn-primary w-100">
+                            Registrarse
+                        </button>
+                    </div>
+
+                </form>
+
+            </div> </div> </div> </div> {% endblock %}

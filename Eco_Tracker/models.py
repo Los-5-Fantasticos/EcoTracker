@@ -36,7 +36,9 @@ class Registro(models.Model):
     codigo = models.BigAutoField(primary_key=True)
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     time_sec = models.IntegerField()
-    huella = models.FloatField()
+    huella_time = models.FloatField()
+    dist_km = models.FloatField()
+    huella_dist = models.FloatField()
     usuario = models.ForeignKey(Clientes, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now_add=True)
 

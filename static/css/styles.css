@@ -107,3 +107,63 @@ body {
 .secondary-btn:hover {
     background-color: #D8C3A5;
 }
+
+
+
+
+
+
+
+/* --- Estilos para el <select> personalizado --- */
+
+/* 1. El 'div' contenedor que creamos */
+.custom-select-wrapper {
+    position: relative; /* Necesario para posicionar la flecha */
+    width: 100%; /* O el ancho que prefieras */
+}
+
+/* 2. El estilo del <select> */
+.custom-select-wrapper select {
+    /* --- Tus estilos redondeados --- */
+    
+    /* Ajusta el radio para hacerlo más o menos redondo */
+    border-radius: 20px; 
+    
+    /* Un borde sutil, puedes cambiar el color */
+    border: 1px solid #ccc; 
+    
+    /* Espaciado interno (arriba/abajo, izquierda/derecha) */
+    padding: 10px 15px; 
+    
+    background-color: #ffffff; /* Fondo blanco */
+    font-size: 16px;
+    
+    /* Ocupa todo el ancho del contenedor */
+    width: 100%; 
+    
+    /* --- La parte clave para "apagar" el estilo feo --- */
+    -webkit-appearance: none; /* Para Safari/Chrome */
+    -moz-appearance: none;    /* Para Firefox */
+    appearance: none;         /* Estándar */
+
+    /* Importante: Dejar espacio para nuestra flecha falsa */
+    padding-right: 40px; 
+}
+
+/* 3. La flecha falsa (añadida con un pseudo-elemento) */
+.custom-select-wrapper::after {
+    /* Puedes usar '▼' o una imagen de flecha */
+    content: '▼'; 
+    
+    font-size: 14px;
+    color: #555; /* Color de la flecha */
+    
+    /* Posicionamiento */
+    position: absolute;
+    right: 15px; /* Distancia desde la derecha */
+    top: 50%; /* Centrado vertical */
+    transform: translateY(-50%); /* Ajuste fino del centrado */
+    
+    /* Evita que la flecha bloquee el clic en el select */
+    pointer-events: none; 
+}

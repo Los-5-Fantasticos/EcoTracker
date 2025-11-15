@@ -1,0 +1,9 @@
+.map {
+    height: 60vh;
+    width: 100%;
+    border-radius: 8px;
+}
+
+.con_color {
+    color: #2a35da;
+}
